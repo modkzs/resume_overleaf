@@ -1,0 +1,82 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+% !Mode:: "TeX:UTF-8"
+
+\documentclass{resume}
+\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
+%\usepackage{zh_CN-Adobefonts_internal} % Simplified Chinese Support using system fonts
+\usepackage{linespacing_fix} % disable extra space before next section
+\usepackage{cite}
+
+\begin{document}
+\pagenumbering{gobble} % suppress displaying page number
+
+\name{何逸轩}
+\centerline{求职意向: nlp 工程师}
+% \basicInfo{hyx\_ict@163.com}{(+86) 185-1023-8192}{北京市海淀区中国科学院南路6号}
+
+
+\basicInfo{
+  \email{hyx\_ict@163.com} \textperiodcentered\
+  \phone{(+86) 185-1023-8192}
+  }
+
+\section{\faGraduationCap\  教育背景}
+\datedsubsection{\textbf{中科院计算所}, 计算机理论，硕士}{2015.9 -- 2018.6}
+\datedsubsection{\textbf{北京邮电大学}, 软件工程，学士}{2011.9 -- 2015.6}
+
+\section{\faGraduationCap  工作背景}
+\datedsubsection{\textbf{微信搜一搜\ 语义计算组}}{2018.7 -- 至今}
+
+\section{\faUsers 项目经历}
+
+\datedsubsection{\textbf{同义词模块}}{2018.7 -- 至今}
+\role{微信搜一搜}{项目人数：1}
+\begin{onehalfspacing}
+对于 query 进行同义词替换，辅助召回和相关性模块
+\begin{itemize}
+  \item 离线通过用户点击、session 切换等方式挖掘相似 query；在相似 query 基础上构造深度对齐模型，将对齐转化为相似的上下文查找，相比 IBM model2 在长尾对齐结果的准确率上有 5 倍的提升；同时产出对齐片段供文章改写模型使用
+  \item 结合搜狗的曝光日志，字词级别的特征，利用编辑的标注数据训练同义词离线判别的 xgb 模型，准确率 85\%，召回86\%
+  \item 利用编辑标注的同义词上下文数据，结合 PMI、词向量、QV、语言模型 等特征训练同义词后验 xgb 模型，准确率 89.2 \%
+  \item 相关性模型上引入同义词特征，在分档准确率上有 1.5\% 的绝对提升
+\end{itemize}
+\end{onehalfspacing}
+
+\datedsubsection{\textbf{query 改写}}{2018.7 -- 至今}
+\role{微信搜一搜}{项目人数：2}
+\begin{onehalfspacing}
+针对于公众号、小程序、文章等进行 query 改写，降低 ncr(无点率)
+\begin{itemize}
+  \item 利用 session 切换, 相似 query 等渠道挖掘改写数据，结合召回结果相关性，权威度等信息利用编辑标注数据训练离线判别模型，准确率 85\%;同时通过用户的在线点击数据利用 T 检验自动进行改写数据的清洗，在线改写对的准确率达到 90\%。
+  \item 结合文本、拼音、字形等数据训练公众号改写深度生成式模型，在公众号文本树上搜索，通过用户点击数据训练，结合历史 attention 等多种信息，准确率达到 75\%。
+  \item 结合字、词、拼音、字形等特征，利用生成式误差、相关性误差、非必留误差等构造多任务学习模型学习垂搜文本的向量化表示，在线利用向量召回的方式进行长尾串的改写；离线准确率 85\%，在线改写准确率 90\%。
+\end{itemize}
+\end{onehalfspacing}
+
+\datedsubsection{\textbf{基于强化学习的文本匹配}}{2017.10 -- 2018.4}
+\role{毕业设计}{项目人数：1}
+
+\begin{onehalfspacing}
+利用强化学习解决文本匹配问题
+\begin{itemize}
+  \item 将文本匹配建模为匹配矩阵中行走问题，利用值迭代和策略梯度求解
+  \item 利用蒙特卡罗树搜索解决局部最优解问题，在公开数据集上优于其他文本匹配方法
+  \item 利用 C++ 并行蒙特卡罗树搜索，4线程下加速比达到 0.8
+\end{itemize}
+\end{onehalfspacing}
+
+\section{\faTrophy\ 学术竞赛}
+\datedline{\textit{kaggle Allstate Claims Severity}\quad \quad {43th/3055}}{2016.09}
+
+\section{\faHeartO\ 获奖荣誉}
+\datedline{\textit{中国科学院大学}{\quad 北纬通信硕士生奖 \quad 三好学生}}{2015-2018}
+
+\section{\faCogs\ 个人能力}
+% increase linespacing [parsep=0.5ex]
+\begin{itemize}[parsep=0.5ex]
+  \item 熟悉 C++，Python，Shell 等编程语言，熟悉 linux 基本环境
+  \item 熟悉常用的深度学习算法以及强化学习算法
+  \item 深入阅读 TensorFlow 源代码，熟悉分布式计算
+\end{itemize}
+
+\end{document}
