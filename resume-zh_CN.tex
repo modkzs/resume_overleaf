@@ -9,74 +9,76 @@
 \usepackage{cite}
 
 \begin{document}
+
+\newcommand{\SubItem}[1]{
+    {\setlength\itemindent{15pt} \item[-] #1}
+}
+
 \pagenumbering{gobble} % suppress displaying page number
 
 \name{何逸轩}
-\centerline{求职意向: nlp 工程师}
-% \basicInfo{hyx\_ict@163.com}{(+86) 185-1023-8192}{北京市海淀区中国科学院南路6号}
-
 
 \basicInfo{
   \email{hyx\_ict@163.com} \textperiodcentered\
   \phone{(+86) 185-1023-8192}
   }
 
-\section{\faGraduationCap\  教育背景}
+\section{\faGraduationCap  教育背景}
 \datedsubsection{\textbf{中科院计算所}, 计算机理论，硕士}{2015.9 -- 2018.6}
 \datedsubsection{\textbf{北京邮电大学}, 软件工程，学士}{2011.9 -- 2015.6}
 
-\section{\faGraduationCap  工作背景}
-\datedsubsection{\textbf{微信搜一搜\ 语义计算组}}{2018.7 -- 至今}
+\section{\faUsers  工作背景}
+\datedsubsection{\textbf{小红书搜索}}{2023.5-至今}
+\datedsubsection{\textbf{百度搜索策略部}}{2020.5-2023.5}
+\datedsubsection{\textbf{微信搜一搜}}{2018.7-2020.5}
 
-\section{\faUsers 项目经历}
-
-\datedsubsection{\textbf{同义词模块}}{2018.7 -- 至今}
-\role{微信搜一搜}{项目人数：1}
+\section{\faCogs 项目经历}
+\datedsubsection{\textbf{小红书搜索相关性}}{2023.5 -- 至今}
+\role{小红书搜索}{}
 \begin{onehalfspacing}
-对于 query 进行同义词替换，辅助召回和相关性模块
+在小红书主要负责优化粗精排搜索相关性
 \begin{itemize}
-  \item 离线通过用户点击、session 切换等方式挖掘相似 query；在相似 query 基础上构造深度对齐模型，将对齐转化为相似的上下文查找，相比 IBM model2 在长尾对齐结果的准确率上有 5 倍的提升；同时产出对齐片段供文章改写模型使用
-  \item 结合搜狗的曝光日志，字词级别的特征，利用编辑的标注数据训练同义词离线判别的 xgb 模型，准确率 85\%，召回86\%
-  \item 利用编辑标注的同义词上下文数据，结合 PMI、词向量、QV、语言模型 等特征训练同义词后验 xgb 模型，准确率 89.2 \%
-  \item 相关性模型上引入同义词特征，在分档准确率上有 1.5\% 的绝对提升
+\item \textbf{精排相关性优化}
+\SubItem{通过基础模型升级大模型、预训练语料优化等手段，优化预训练模型效果}
+\SubItem{结合 chatgpt 等大模型，进行样本的自动化标注、难 query 生成}
+\SubItem{通过 vit、对比学习等手段，引入多模相关性，优化封面图匹配算法}
+\item \textbf{粗排相关性优化} 
+\SubItem{通过引入大规模对比学习、跨GPU跨step组batch等方法，优化粗排双塔预训练模型效果}
+\SubItem{通过引入pairwise蒸馏、有监督蒸馏等手段，提升模型的蒸馏效果}
 \end{itemize}
 \end{onehalfspacing}
 
-\datedsubsection{\textbf{query 改写}}{2018.7 -- 至今}
-\role{微信搜一搜}{项目人数：2}
+\datedsubsection{\textbf{百度搜索相关性}}{2020.5 -- 2023.5}
+\role{百度搜索策略部}{}
 \begin{onehalfspacing}
-针对于公众号、小程序、文章等进行 query 改写，降低 ncr(无点率)
+先后担任相关性团队-内容建模方向和阿拉丁整页团队-语义相关性方向负责人，负责优化搜索相关性。
 \begin{itemize}
-  \item 利用 session 切换, 相似 query 等渠道挖掘改写数据，结合召回结果相关性，权威度等信息利用编辑标注数据训练离线判别模型，准确率 85\%;同时通过用户的在线点击数据利用 T 检验自动进行改写数据的清洗，在线改写对的准确率达到 90\%。
-  \item 结合文本、拼音、字形等数据训练公众号改写深度生成式模型，在公众号文本树上搜索，通过用户点击数据训练，结合历史 attention 等多种信息，准确率达到 75\%。
-  \item 结合字、词、拼音、字形等特征，利用生成式误差、相关性误差、非必留误差等构造多任务学习模型学习垂搜文本的向量化表示，在线利用向量召回的方式进行长尾串的改写；离线准确率 85\%，在线改写准确率 90\%。
+  \item \textbf{网页信息建模}。对网页和阿拉丁结果的信息建模。
+  \SubItem{自然结果：在自然结果上，结合 qimp、紧密度 等信息，对自然结果的摘要进行抽取，对问答query优化了 nn 的抽取方案;同时对网页中的连续命中情况设计特征优化}
+  \SubItem{阿拉丁结果：对于阿拉丁结果，在 summary 抽取上，针对于结构化的 json 信息抽取进行了优化；同时结合阿拉丁本身特点，利用点击 query 提炼卡片需求词}
+  \item \textbf{预训练优化}。ernie的预训练是基于大规模的网络数据，和搜索场景有较大的差异，因此我们在搜索场景上进行了进一步探索，主要包括搜索预训练、数据清洗、知识继承、任务导向预训练等。通过预训练优化，在 ernie 上累计有15\%的pnr提升
+  \item \textbf{特殊问题处理}。由于 ernie 的训练中无法有些类型数据样本量过小，导致 ernie 本身难以学习相应匹配范式，因此需要对特殊子问题专门处理。
+  \SubItem{核心 term 丢失：对于核心 term，主要通过样本构造和挖掘进行。在整页场景下，样本挖掘结合了卡片本身的信息进行优化，解决了 70\% 的历史case}
+  \SubItem{内容命中：对于内容命中，除了样本挖掘和构造外，我们还提出了换域蒸馏等方案，解决了 60\% 的历史case}
+  \item \textbf{模型结构优化}。针对不同场景下的匹配问题，我们对 ernie 模型的结构进行了优化
+  \SubItem{PyramidErnie:针对匹配的特殊场景，我们结合双塔和单塔的特点，将 qt 先通过双塔 ernie 独立建模，再通过单塔 ernie 联合建模。结合 attention mask、词还原等方案，在参数量不变，计算量降低的情况下，PyramidErnie在所有数据集上指标均优于单塔 ernie}
+  \SubItem{MOE: 整页不同阿拉丁卡片的匹配模式存在较大差异。针对此问题，我们在 ernie 基础上引入 moe，以卡片本身信息作为路由输入，pnr 相对提升 5\%}
 \end{itemize}
 \end{onehalfspacing}
 
-\datedsubsection{\textbf{基于强化学习的文本匹配}}{2017.10 -- 2018.4}
-\role{毕业设计}{项目人数：1}
-
+\datedsubsection{\textbf{query 分析-改写}}{2018.7 -- 2020.5}
+\role{微信搜一搜}{}
 \begin{onehalfspacing}
-利用强化学习解决文本匹配问题
+在搜一搜主要负责 query 分析方向的改写，包括 term 改写 和 query 改写。
 \begin{itemize}
-  \item 将文本匹配建模为匹配矩阵中行走问题，利用值迭代和策略梯度求解
-  \item 利用蒙特卡罗树搜索解决局部最优解问题，在公开数据集上优于其他文本匹配方法
-  \item 利用 C++ 并行蒙特卡罗树搜索，4线程下加速比达到 0.8
+  \item term 改写
+  \SubItem{离线:\ 通过用户点击、session 切换等方式挖掘相似 query；在相似 query 基础上构造深度对齐模型产出对齐片段，训练 xgb 模型过滤低置信片段}
+  \SubItem{在线:\ 利用标注数据，结合 PMI、词向量、QV、语言模型 等特征训练同义词后验 xgb 模型；在相关性模型上引入同义词特征
+  }
+  \item query 改写
+  \SubItem{离线挖掘：利用 session、相似 query 等渠道挖掘改写数据，结合召回结果信息利用人工标注数据训练离线判别模型；同时结合用户点击率在线上进行二次清洗}
+  \SubItem{模型生成：结合文本、拼音、字形等多种信息训练公众号改写数搜索生成式模型; 同时结合字、词、拼音、字形等特征学习向量化表示}
 \end{itemize}
 \end{onehalfspacing}
-
-\section{\faTrophy\ 学术竞赛}
-\datedline{\textit{kaggle Allstate Claims Severity}\quad \quad {43th/3055}}{2016.09}
-
-\section{\faHeartO\ 获奖荣誉}
-\datedline{\textit{中国科学院大学}{\quad 北纬通信硕士生奖 \quad 三好学生}}{2015-2018}
-
-\section{\faCogs\ 个人能力}
-% increase linespacing [parsep=0.5ex]
-\begin{itemize}[parsep=0.5ex]
-  \item 熟悉 C++，Python，Shell 等编程语言，熟悉 linux 基本环境
-  \item 熟悉常用的深度学习算法以及强化学习算法
-  \item 深入阅读 TensorFlow 源代码，熟悉分布式计算
-\end{itemize}
 
 \end{document}
